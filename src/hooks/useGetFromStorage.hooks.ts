@@ -11,7 +11,6 @@ export const useGetFromStorage = (key: string) => {
       if (valueFromStorage) {
         setValue(valueFromStorage);
       }
-      console.log('value to the key', valueFromStorage);
     };
     checkValue();
   }, [key]);

@@ -1,7 +1,9 @@
 {
-  "name": "reactnativedatastorage",
+  "name": "react-native-data-storage-hooks",
   "version": "0.0.1",
-  "private": true,
+  "description": "A simple react native async storage hooks library based on the @react-native-async-storage/async-storage library",
+  "main": "index.js",
+  "react-native": "index.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -9,6 +11,23 @@
     "test": "jest",
     "lint": "eslint ."
   },
+  "keywords": [
+    "react-native",
+    "async-storage",
+    "ios",
+    "android",
+    "mobile",
+    "data storage"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/Aexol/react-native-data-storage.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/Aexol/react-native-data-storage/issues"
+  },
+  "homepage": "https://gitlab.com/Aexol/react-native-data-storage#readme",
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.9",
     "react": "17.0.2",
