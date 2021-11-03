@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,33 +7,24 @@
  * @flow strict-local
  */
 
-// API:
-// 1. Przechowywanie pojedynczej wartości
-// 2.
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
-// import useSetSingleValue from './src/hooks/useSetSingleValue';
-import useSetMultipleValues from './src/hooks/useSetMultipleValues.hook';
+import {useSetSingleValue} from './src/hooks/useSetSingleValue.hook';
+import {useSetMultipleValues} from './src/hooks/useSetMultipleValues.hook';
+import {useGetWholeStorage} from './src/hooks/useGetWholeStorage.hooks';
+import {useGetFromStorage} from './src/hooks/useGetFromStorage.hooks';
 
 const App = () => {
   // const [name, setName] = useSetSingleValue('name', 'Bob');
-  // const [email, setEmail] = useSetSingleValue('email', 'yajananrao@gmail.com');
+  const [email, setEmail] = useSetSingleValue('email', 'yajananrao@gmail.com');
   const [values, setValues] = useSetMultipleValues([
     ['imie', 'Ola'],
-    ['nazwisko', 'MaKota'],
-    ['wiek', 24],
+    ['nazwisko', 'Makota'],
   ]);
+  const [valuesFromStorage] = useGetWholeStorage();
   useEffect(() => {
     const tryOut = async () => {
-      await AsyncStorage.clear();
-      setValues(
-        ['imie', 'Alicja'],
-        ['nazwisko', 'z krainy czarów'],
-        ['wiek', 22],
-      );
-      console.log('Values', values);
+      console.log('global: ', global.STORAGE);
     };
     tryOut();
     // eslint-disable-next-line react-hooks/exhaustive-deps

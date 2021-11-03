@@ -1,19 +1,19 @@
+/* eslint-disable prettier/prettier */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useState, useEffect} from 'react';
+import {useGetWholeStorage} from './index';
 
-const useSetSingleValue = (key: string, initialValue: any) => {
+export const useSetSingleValue = (key: string, initialValue: any) => {
   const [storedValue, setStoredValue] = useState();
+  const [, refreshValues] = useGetWholeStorage();
 
   async function getStoredItem() {
     try {
+      refreshValues();
       const item = await AsyncStorage.getItem(key);
       const value = item ? JSON.parse(item) : initialValue;
-      //   if (!item) {
-      //     await AsyncStorage.setItem(key, JSON.stringify(initialValue));
-      //   }
       setStoredValue(value);
     } catch (error) {
-      // If error also return initialValue
       console.log(error);
     }
   }
@@ -36,4 +36,3 @@ const useSetSingleValue = (key: string, initialValue: any) => {
 
   return [storedValue, setValue];
 };
-export default useSetSingleValue;

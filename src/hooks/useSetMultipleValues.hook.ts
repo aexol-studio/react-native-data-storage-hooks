@@ -1,27 +1,68 @@
+/* eslint-disable prettier/prettier */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useState, useEffect} from 'react';
+import {useGetWholeStorage} from './index';
 
-const useSetMultipleValues = (keyValuePairs: Array<Array<string>>) => {
-  const [storedValues, setStoredValues] = useState<string[][]>([]);
-  console.log('keyValuePairs', keyValuePairs);
-  console.log('storedValues', storedValues);
+// const useSetMultipleValues = (
+//   keyValuePairs: {key: string; value: string}[],
+// ) => {
+//   const [storedValues, setStoredValues] = useState<
+//     {key: string; value: string}[]
+//   >([]);
+
+//   useEffect(() => {
+//     setStoredValues(keyValuePairs);
+//     console.log('storedValues', storedValues);
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
+
+//   const setValues = (newValues: {key: string; value: string}[]) => {
+//     console.log('New values', newValues);
+//     try {
+//       const valuesToStore =
+//         newValues instanceof Function ? newValues(storedValues) : newValues;
+//       setStoredValues(valuesToStore);
+//       console.log('valuesToStore', valuesToStore);
+//       newValues.forEach(async el => {
+//         await AsyncStorage.setItem(el.key, JSON.stringify(el.value));
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   return [storedValues, setValues];
+// };
+// export default useSetMultipleValues;
+
+export const useSetMultipleValues = (
+  keyValuePairs: [string, string | number | object | Array<any>][],
+) => {
+  const [storedValues, setStoredValues] = useState<
+    [string, string | number | object | Array<any>][]
+  >([]);
+  const [, refreshValues] = useGetWholeStorage();
 
   useEffect(() => {
     setStoredValues(keyValuePairs);
-    console.log('storedValues', storedValues);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setValues = async (newValues: Array<Array<string>>) => {
-    console.log('Z set values', newValues);
+  const setValues = (
+    newValues: [string, string | number | object | Array<any>][],
+  ) => {
     try {
+      refreshValues();
       const valuesToStore =
-        newValues instanceof Function ? newValues(newValues) : newValues;
-      console.log('valuesToStore', valuesToStore, newValues);
+        newValues instanceof Function ? newValues(storedValues) : newValues;
       setStoredValues(valuesToStore);
-      newValues.forEach(async el => {
-        await AsyncStorage.setItem(el[0], JSON.stringify(el[1]));
-      });
+      if (newValues.length > 0) {
+        newValues.forEach(async el => {
+          if (el.length > 0 && typeof el[0] === 'string') {
+            await AsyncStorage.setItem(el[0], JSON.stringify(el[1]));
+          }
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +70,6 @@ const useSetMultipleValues = (keyValuePairs: Array<Array<string>>) => {
 
   return [storedValues, setValues];
 };
-export default useSetMultipleValues;
 
 // export const setSingleKey = async (
 //   key: string,
