@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useState, useEffect} from 'react';
-import {useGetWholeStorage} from './index';
-
-export const useSetSingleValue = (key: string, initialValue: any) => {
+import { useState, useEffect } from 'react';
+import { useGetWholeStorage } from './index';
+export const useSetSingleValue = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState();
   const [, refreshValues] = useGetWholeStorage();
 
@@ -18,14 +17,12 @@ export const useSetSingleValue = (key: string, initialValue: any) => {
   }
 
   useEffect(() => {
-    getStoredItem();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getStoredItem(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setValue = async (value: any) => {
+  const setValue = async value => {
     try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       await AsyncStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
@@ -35,3 +32,4 @@ export const useSetSingleValue = (key: string, initialValue: any) => {
 
   return [storedValue, setValue];
 };
+//# sourceMappingURL=useSetSingleValue.hook.js.map

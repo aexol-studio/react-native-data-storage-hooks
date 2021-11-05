@@ -1,15 +1,22 @@
 {
   "name": "react-native-data-storage-hooks",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "A simple react native async storage hooks library based on the @react-native-async-storage/async-storage library",
-  "main": "index.js",
-  "react-native": "index.js",
+  "main": "dist/module/index.ts",
+  "module": "dist/module/index.ts",
+  "react-native": "src/index.ts",
+  "types": "dist/typescript/src/index.d.ts",
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepare": "bob build"
   },
   "keywords": [
     "react-native",
@@ -30,6 +37,7 @@
   "homepage": "https://gitlab.com/Aexol/react-native-data-storage#readme",
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.9",
+    "@react-native-community/bob": "^0.17.1",
     "react": "17.0.2",
     "react-native": "0.66.1"
   },
@@ -38,6 +46,7 @@
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
     "@types/react": "^17.0.33",
     "@types/react-native": "^0.66.1",
     "@types/react-test-renderer": "^17.0.1",
@@ -50,5 +59,13 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "dist",
+    "targets": [
+      "module",
+      "typescript"
+    ]
   }
 }
