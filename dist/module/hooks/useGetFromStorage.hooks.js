@@ -6,13 +6,15 @@ export const useGetFromStorage = key => {
     const checkValue = async () => {
       const valueFromStorage = await AsyncStorage.getItem(key);
 
-      if (valueFromStorage) {
-        setValue(valueFromStorage);
+      if (valueFromStorage !== null) {
+        setValue(JSON.parse(valueFromStorage));
+      } else {
+        setValue(null);
       }
     };
 
-    checkValue();
-  }, [key]);
+    checkValue(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return value;
 };
 //# sourceMappingURL=useGetFromStorage.hooks.js.map

@@ -10,7 +10,7 @@ It also provides a method to get all the data from async storage at once, which 
 
 $ npm install react-native-data-storage-hooks --save
 
-$ react-native link react-native-data-storage-hooks
+For ios go to the ios folder and use pod install
 
 ## Usage
 
@@ -25,18 +25,32 @@ import {
 
 function App() {
   const [email, setEmail] = useSetSingleValue('email', 'example@email.com');
-  const [storageValues] = useGetWholeStorage();
+  const [storageValues, refresh] = useGetWholeStorage();
   const value = useGetFromStorage('name');
-  const [values, setValues] = useSetMultipleValues([
+  const [multipleValues, setMultipleValues] = useSetMultipleValues([
     ['name', 'Anna'],
-    ['data', {age: 20, profession: 'accountant'}],
+    ['data', {age: 20, profession: 'accountant'}]
   ]);
   const {deleteItem, clearAll} = useDeleteFromStorage();
 
   useEffect(() => {
     const storageOperations = async () => {
+      console.log(email); // example@email.com
+      setEmail('anotherExample@email.com');
+      console.log(email); // anotherExample@email.com
+      console.log(multipleValues); // [['name', 'Anna'],['data', {age: 20, profession: 'accountant'}]]
+      setMultipleValues([
+        ['name', 'Alicia'],
+        ['data', {age: 25, profession: 'taxi driver'}]
+      ])
+      console.log(multipleValues); // [['name', 'Alicia'],['data', {age: 25, profession: 'taxi driver'}]]
+      console.log(storageValues); // returns the whole storage:
+      // [['email', 'anotherExample@email.com'], ['name', 'Alicia'],['data', {age: 25, profession: 'taxi driver'}]]
       deleteItem('name');
+      console.log(storageValues); // returns the whole storage:
+      // [['email', 'anotherExample@email.com'], ['name', 'Alicia'],['data', {profession: 'taxi driver'}]]
       clearAll();
+      console.log(storageValues); // []
     };
     storageOperations();
   }, []);

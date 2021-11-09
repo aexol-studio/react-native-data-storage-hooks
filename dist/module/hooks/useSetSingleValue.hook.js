@@ -8,11 +8,16 @@ export const useSetSingleValue = (key, initialValue) => {
   async function getStoredItem() {
     try {
       refreshValues();
+
+      if (key === '' || key === undefined || initialValue === null || initialValue === undefined) {
+        return;
+      }
+
       const item = await AsyncStorage.getItem(key);
       const value = item ? JSON.parse(item) : initialValue;
       setStoredValue(value);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -22,11 +27,21 @@ export const useSetSingleValue = (key, initialValue) => {
 
   const setValue = async value => {
     try {
+      if (value === null || value === undefined) {
+        return;
+      }
+
       const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
       await AsyncStorage.setItem(key, JSON.stringify(valueToStore));
+      const valueFromStorage = await AsyncStorage.getItem(key);
+
+      if (valueFromStorage) {
+        setStoredValue(JSON.parse(valueFromStorage));
+      } else {
+        console.error('Value could not be set to async storage');
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

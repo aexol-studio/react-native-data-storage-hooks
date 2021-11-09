@@ -1,1 +1,1 @@
-export declare const useSetMultipleValues: () => ([string, string | number | object | any[]][] | ((newValues: [string, string | number | object | Array<any>][]) => void))[];
+export declare const useSetMultipleValues: (keyValuePairs: [string, string | number | object | Array<any>][]) => readonly [[string, string | number | object | any[]][], (newValues: [string, string | number | object | Array<any>][]) => void];

@@ -1,1 +1,1 @@
-export function useSetMultipleValues(): (never[] | ((newValues: any) => void))[];
+export function useSetMultipleValues(keyValuePairs: any): (never[] | ((newValues: any) => void))[];
