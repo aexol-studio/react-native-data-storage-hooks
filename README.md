@@ -1,5 +1,8 @@
 # React-native-data-storage-hooks
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/npm/v/react-native-data-storage-hooks.svg?style=flat-square)](https://www.npmjs.com/package/react-native-data-storage-hooks)
+
 React-native-data-storage-hooks is a library based on AsyncStorage designed for React Native with Type Script.
 
 It provides hooks which enable setting single and multiple data of any type convertable to JSON to the async storage.

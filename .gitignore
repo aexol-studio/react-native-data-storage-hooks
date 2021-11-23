@@ -61,3 +61,10 @@ buck-out/
 
 # generated files by bob
 lib/
+
+# Example files
+/App.js
+/index.js
+android/
+ios/
+/app.json
