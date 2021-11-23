@@ -1,5 +1,8 @@
 # React-native-data-storage-hooks
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/npm/v/react-native-data-storage-hooks.svg?style=flat-square)](https://www.npmjs.com/package/react-native-data-storage-hooks)
+
 React-native-data-storage-hooks is a library based on AsyncStorage designed for React Native with Type Script.
 
 It provides hooks which enable setting single and multiple data of any type convertable to JSON to the async storage.
@@ -29,7 +32,7 @@ function App() {
   const value = useGetFromStorage('name');
   const [multipleValues, setMultipleValues] = useSetMultipleValues([
     ['name', 'Anna'],
-    ['data', {age: 20, profession: 'accountant'}]
+    ['data', {age: 20, profession: 'accountant'}],
   ]);
   const {deleteItem, clearAll} = useDeleteFromStorage();
 
@@ -41,8 +44,8 @@ function App() {
       console.log(multipleValues); // [['name', 'Anna'],['data', {age: 20, profession: 'accountant'}]]
       setMultipleValues([
         ['name', 'Alicia'],
-        ['data', {age: 25, profession: 'taxi driver'}]
-      ])
+        ['data', {age: 25, profession: 'taxi driver'}],
+      ]);
       console.log(multipleValues); // [['name', 'Alicia'],['data', {age: 25, profession: 'taxi driver'}]]
       console.log(storageValues); // returns the whole storage:
       // [['email', 'anotherExample@email.com'], ['name', 'Alicia'],['data', {age: 25, profession: 'taxi driver'}]]
