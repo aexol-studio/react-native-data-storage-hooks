@@ -27,38 +27,32 @@ import {
 } from 'react-native-data-storage-hooks';
 
 function App() {
-  const [email, setEmail] = useSetSingleValue('email', 'example@email.com');
+  const [email, setEmail] = useSetSingleValue('email', '');
   const [storageValues, refresh] = useGetWholeStorage();
   const value = useGetFromStorage('name');
-  const [multipleValues, setMultipleValues] = useSetMultipleValues([
-    ['name', 'Anna'],
-    ['data', {age: 20, profession: 'accountant'}],
-  ]);
+  const [multipleValues, setMultipleValues] = useSetMultipleValues([]);
   const {deleteItem, clearAll} = useDeleteFromStorage();
 
   useEffect(() => {
     const storageOperations = async () => {
-      console.log(email); // example@email.com
-      setEmail('anotherExample@email.com');
-      console.log(email); // anotherExample@email.com
-      console.log(multipleValues); // [['name', 'Anna'],['data', {age: 20, profession: 'accountant'}]]
+      setEmail('email@email.com');
       setMultipleValues([
         ['name', 'Alicia'],
-        ['data', {age: 25, profession: 'taxi driver'}],
-      ]);
-      console.log(multipleValues); // [['name', 'Alicia'],['data', {age: 25, profession: 'taxi driver'}]]
+        ['data', {age: 25, profession: 'accountant'}]
+      ])
+      console.log(multipleValues); // [['name', 'Alicia'],['data', {age: 25, profession: 'accountant'}]]
       console.log(storageValues); // returns the whole storage:
-      // [['email', 'anotherExample@email.com'], ['name', 'Alicia'],['data', {age: 25, profession: 'taxi driver'}]]
+      // [['email', 'email@email.com'], ['name', 'Alicia'],['data', {age: 25, profession: 'accountant'}]]
       deleteItem('name');
       console.log(storageValues); // returns the whole storage:
-      // [['email', 'anotherExample@email.com'], ['name', 'Alicia'],['data', {profession: 'taxi driver'}]]
+      // [['email', 'email@email.com'], ['name', 'Alicia'],['data', {profession: 'accountant'}]]
       clearAll();
       console.log(storageValues); // []
     };
     storageOperations();
   }, []);
 
-  return <View />;
+  return (...);
 }
 ```
 

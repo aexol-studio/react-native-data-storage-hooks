@@ -1,6 +1,6 @@
 {
   "name": "react-native-data-storage-hooks",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "A simple react native async storage hooks library based on the @react-native-async-storage/async-storage library",
   "main": "dist/module/index.ts",
   "module": "dist/module/index.ts",
