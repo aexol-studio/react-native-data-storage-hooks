@@ -11,9 +11,13 @@ It also provides a method to get all the data from async storage at once, which 
 
 # Getting started
 
-$ npm install react-native-data-storage-hooks --save
+Before the installation make sure that you have the @react-native-async-storage/async-storage library installed in your project. 
 
-For ios go to the ios folder and use pod install
+```bash
+  npm install react-native-data-storage-hooks --save
+  cd ios
+  pod install
+```
 
 ## Usage
 
